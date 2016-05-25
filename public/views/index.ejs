@@ -1,0 +1,32 @@
+<% include public/views/header.ejs %>
+
+<div class="row">
+	<div class="small-12 columns">
+		<h2 id="title">[ REPLACE ]</h2>
+	</div>
+</div>
+<br>
+<div class="row">
+    <div class="small-7 columns">
+        <ul class="tabs" data-tabs id="wo-tabs">
+            <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Entry/Update</a></li>
+            <li class="tabs-title"><a href="#panel2">List</a></li>
+        </ul>
+    </div>
+</div>
+<div class="tabs-content" data-tabs-content="wo-tabs">
+    <div class="tabs-panel is-active" id="panel1">
+
+    </div>
+    <div class="tabs-panel" id="panel2">
+        <% include public/views/list.ejs %>
+    </div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="public/javascripts/libraries/jquery-2.2.3.min.js"></script>
+<script src="public/javascripts/libraries/foundation.min.js"></script>
+<script src="public/javascripts/bundle.js"></script>
+<script src="https://use.fontawesome.com/4270d89823.js"></script>
+
+<% include public/views/footer.ejs %>
