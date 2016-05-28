@@ -2,13 +2,12 @@
  *   @author Bates, Howard [ hbates@northmen.org ]
  *   @version 0.0.1
  *   @summary http server: HPA Forms || Created: 05.25.2016
- *   @todo zip code DB; save as PDF; save as CSV
+ *   @todo save as PDF; save as CSV
  */
 
 "use strict";
 
 const FADE = require('./FadeStuff');
-const DATA_HANDLER = require('./DataHandler');
 
 class main {
      constructor() {
@@ -16,16 +15,27 @@ class main {
           this.loadZipCodes();
           main.handleAllergies();
           main.setDate();
+          this.handleZipEntry();
      }
 
      loadZipCodes() {
-          new DATA_HANDLER('/data/ZipCodeDatabase.csv', (finalData) => {
-               this.setZipCodes(finalData);
-          });
-     }
-
-     setZipCodes(finalData) {
-          this.zipCodes = finalData;
+          let bustCache = '?' + new Date().getTime();
+          const XHR = new XMLHttpRequest();
+          XHR.open('POST', document.url  + bustCache, true);
+          XHR.setRequestHeader('X-Requested-load', 'XMLHttpRequest2');
+          XHR.send();
+          XHR.onload = () => {
+               if (XHR.readyState == 4 && XHR.status == 200) {
+                    let zipData = XHR.responseText;
+                    const COLUMNS = 3;
+                    let tempArray, finalData = [];
+                    tempArray = zipData.split(/\r?\n/); //remove newlines
+                    for (let i = 0; i < tempArray.length; i++) {
+                         finalData[i] = tempArray[i].split(/,/).slice(0, COLUMNS);
+                    }
+                    this.zipCodes = finalData;
+               }
+          };
      }
 
      static handleAllergies() {
@@ -36,6 +46,19 @@ class main {
           document.getElementById('noAllergy').addEventListener('click', () => {
                main.fade('out', 'allergiesDiv');
                document.getElementById('allergies').value = '';
+          });
+     }
+
+     handleZipEntry() {
+          document.getElementById('zip').addEventListener('change', () => {
+               for (let i = 0; i < this.zipCodes.length; i++) {
+                    if (document.getElementById('zip').value == this.zipCodes[i][0]) {
+                         document.getElementById('city').value = this.zipCodes[i][1];
+                         document.getElementById('state').value = this.zipCodes[i][2];
+                         console.log(`City: ${this.zipCodes[i][1]}  State: ${this.zipCodes[i][2]}`);
+                         break;
+                    }
+               }
           });
      }
 

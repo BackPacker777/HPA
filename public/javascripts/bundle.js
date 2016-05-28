@@ -48,13 +48,12 @@
 	 *   @author Bates, Howard [ hbates@northmen.org ]
 	 *   @version 0.0.1
 	 *   @summary http server: HPA Forms || Created: 05.25.2016
-	 *   @todo zip code DB; save as PDF; save as CSV
+	 *   @todo save as PDF; save as CSV
 	 */
 
 	"use strict";
 
 	const FADE = __webpack_require__(1);
-	const DATA_HANDLER = __webpack_require__(2);
 
 	class main {
 	     constructor() {
@@ -62,16 +61,27 @@
 	          this.loadZipCodes();
 	          main.handleAllergies();
 	          main.setDate();
+	          this.handleZipEntry();
 	     }
 
 	     loadZipCodes() {
-	          new DATA_HANDLER('/data/ZipCodeDatabase.csv', (finalData) => {
-	               this.setZipCodes(finalData);
-	          });
-	     }
-
-	     setZipCodes(finalData) {
-	          this.zipCodes = finalData;
+	          let bustCache = '?' + new Date().getTime();
+	          const XHR = new XMLHttpRequest();
+	          XHR.open('POST', document.url  + bustCache, true);
+	          XHR.setRequestHeader('X-Requested-load', 'XMLHttpRequest2');
+	          XHR.send();
+	          XHR.onload = () => {
+	               if (XHR.readyState == 4 && XHR.status == 200) {
+	                    let zipData = XHR.responseText;
+	                    const COLUMNS = 3;
+	                    let tempArray, finalData = [];
+	                    tempArray = zipData.split(/\r?\n/); //remove newlines
+	                    for (let i = 0; i < tempArray.length; i++) {
+	                         finalData[i] = tempArray[i].split(/,/).slice(0, COLUMNS);
+	                    }
+	                    this.zipCodes = finalData;
+	               }
+	          };
 	     }
 
 	     static handleAllergies() {
@@ -82,6 +92,19 @@
 	          document.getElementById('noAllergy').addEventListener('click', () => {
 	               main.fade('out', 'allergiesDiv');
 	               document.getElementById('allergies').value = '';
+	          });
+	     }
+
+	     handleZipEntry() {
+	          document.getElementById('zip').addEventListener('change', () => {
+	               for (let i = 0; i < this.zipCodes.length; i++) {
+	                    if (document.getElementById('zip').value == this.zipCodes[i][0]) {
+	                         document.getElementById('city').value = this.zipCodes[i][1];
+	                         document.getElementById('state').value = this.zipCodes[i][2];
+	                         console.log(`City: ${this.zipCodes[i][1]}  State: ${this.zipCodes[i][2]}`);
+	                         break;
+	                    }
+	               }
 	          });
 	     }
 
@@ -143,48 +166,6 @@
 	}
 
 	module.exports = FadeStuff;
-
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-	/*  AUTHOR: hbates@northmen.org
-	 *  VERSION: 1.0.0
-	 *  CREATED: 11.25.2015
-	 */
-
-	"use strict";
-
-	class DataHandler {
-	     constructor(filePath, callback) {
-	          console.log(filePath);
-	          if (!filePath) {
-	               console.log('FILE DOES NOT EXIST!');
-	          } else {
-	               let request = new XMLHttpRequest();
-	               request.open("GET", filePath, true);
-	               request.send();
-	               request.onload = () => {
-	                    const COLUMNS = 3;
-	                    let data, middleData, finalData = [];
-	                    if (request.readyState === 4 && request.status === 200) {
-	                         data = request.responseText.split(/\n/);
-	                         console.log(data);
-	                    }
-	                    for (let i = 0; i < data.length; i++) {
-	                         middleData = data[i].split(/,/);
-	                         finalData[i] = []; //makes it an MD array
-	                         for (let j = 0; j < COLUMNS; j++) {
-	                              finalData[i][j] = middleData[j];
-	                         }
-	                    }
-	                    callback(finalData);
-	               };
-	          }
-	     }
-	 }
-
-	module.exports = DataHandler;
 
 /***/ }
 /******/ ]);

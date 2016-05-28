@@ -7,14 +7,31 @@
 
 "use strict";
 
+const FS = require ('fs');
 const DATASTORE = require('nedb');
 let DB = new DATASTORE({ filename: './data/forms_db.json', autoload: true });
      this.data = [];
 
 class DataHandler {
-	constructor() {
-          DB.loadDatabase();
+	constructor(whichAjax) {
+          if (whichAjax == 0 || whichAjax == 1) {
+               DB.loadDatabase();
+          }
 	}
+
+     loadCSVData(filePath, callback) {
+          let fileHandle = FS.readFileSync(filePath, 'utf8');
+          callback(fileHandle.toString());
+
+
+          /*const COLUMNS = 3;
+          let tempArray, finalData = [];
+          tempArray = fileHandle.split(/\r?\n/); //remove newlines
+          for (let i = 0; i < tempArray.length; i++) {
+               finalData[i] = tempArray[i].split(/,/).slice(0, COLUMNS);
+          }*/
+
+     }
 
      loadData(callback) {
           DB.find({}, (err, docs) => {

@@ -2,12 +2,12 @@
  *   @author Bates, Howard [ hbates@northmen.org ]
  *   @version 0.0.1
  *   @summary http server: HPA Forms || Created: 05.25.2016
- *   @todo zip code DB; save as PDF; save as CSV
+ *   @todo save as PDF; save as CSV
  */
 
 "use strict";
 
-// const DATA_HANDLER = require('./node/DataHandler');
+const DATA_HANDLER = require('./node/DataHandler');
 
 class app {
      constructor() {
@@ -47,9 +47,11 @@ class app {
                               this.loadData(req, res, 0);
                          } else if (req.headers['x-requested-load'] === 'XMLHttpRequest1') {
                               this.loadData(req, res, 1);
+                         } else if (req.headers['x-requested-load'] === 'XMLHttpRequest2') {
+                              this.loadData(req, res, 2);
                          } else {
                               console.log("[405] " + req.method + " to " + req.url);
-                              res.writeHead(405, "Method not supported", { 'Content-Type': 'text/html' });
+                              res.writeHead(405, "Method not supported", {'Content-Type': 'text/html'});
                               res.end('<html><head><title>405 - Method not supported</title></head><body><h1>Method not supported.</h1></body></html>');
                          }
                     } else if (req.url.indexOf('/javascripts/') >= 0) {
@@ -82,13 +84,18 @@ class app {
                }).on('end', () => {
                     this.nedbData.queryData(formData);
                });
+          } else if (whichAjax === 2) {
+               new DATA_HANDLER(whichAjax).loadCSVData('./data/ZipCodeDatabase.csv', (zipData) => {
+                    res.writeHead(200, {'content-type': 'application/json'});
+                    res.end(zipData);
+               });
           }
-          this.nedbData.loadData((docs) => {
+          /*this.nedbData.loadData((docs) => {
                let jsonDocs = JSON.stringify(docs); // http://stackoverflow.com/questions/5892569/responding-with-a-json-object-in-nodejs-converting-object-array-to-json-string
                res.writeHead(200, {'content-type': 'application/json'});
                res.end(jsonDocs);
                this.ejsData = docs;
-          });
+          });*/
      }
 }
 
