@@ -7,15 +7,15 @@
 
 "use strict";
 
-const DATA_HANDLER = require('./node/DataHandler');
+// const DATA_HANDLER = require('./node/DataHandler');
 
 class app {
      constructor() {
-          this.ejsData = null;
-          this.nedbData = new DATA_HANDLER();
-          this.nedbData.loadData((docs) => {
-               this.ejsData = docs;
-          });
+          // this.ejsData = null;
+          // this.nedbData = new DATA_HANDLER();
+          // this.nedbData.loadData((docs) => {
+          //      this.ejsData = docs;
+          // });
           this.loadServer();
      }
 

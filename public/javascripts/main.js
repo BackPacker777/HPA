@@ -12,13 +12,20 @@ const DATA_HANDLER = require('./DataHandler');
 
 class main {
      constructor() {
-          this.zipCodes = this.loadZipCodes();
+          this.zipCodes = null;
+          this.loadZipCodes();
           main.handleAllergies();
           main.setDate();
      }
 
      loadZipCodes() {
-          return new DATA_HANDLER();
+          new DATA_HANDLER('/data/ZipCodeDatabase.csv', (finalData) => {
+               this.setZipCodes(finalData);
+          });
+     }
+
+     setZipCodes(finalData) {
+          this.zipCodes = finalData;
      }
 
      static handleAllergies() {
@@ -42,4 +49,6 @@ class main {
      }
 }
 
-new main();
+window.addEventListener('load', () => {
+     new main();
+});
