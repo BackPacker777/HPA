@@ -1,3 +1,12 @@
+/**
+ *   @author Bates, Howard [ hbates@northmen.org ]
+ *   @version 0.0.1
+ *   @summary http server: HPA Forms || Created: 05.25.2016
+ *   @todo zip code DB; save as PDF; save as CSV
+ */
+
+"use strict";
+
 const DATA_HANDLER = require('./node/DataHandler');
 
 class app {
