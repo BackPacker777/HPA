@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectTasksOptions">
-    <TaskOptions isEnabled="true">
+    <TaskOptions isEnabled="false">
       <option name="arguments" value="--config webpack.config.js" />
       <option name="checkSyntaxErrors" value="false" />
       <option name="description" value="" />
@@ -17,7 +17,7 @@
       <option name="program" value="C:/Program Files/nodejs/webpack.cmd" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="true" />
-      <option name="workingDir" value="Z:\ModernWebDev\CODE\HPA\public\javascripts" />
+      <option name="workingDir" value="C:\SANDBOX\HPA\public\javascripts" />
       <envs />
     </TaskOptions>
   </component>
