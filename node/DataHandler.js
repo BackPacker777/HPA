@@ -9,16 +9,16 @@
 
 const FS = require ('fs'),
      DATASTORE = require('nedb'),
+     PDF = require('html5-to-pdf'),
      JSREPORT = require('jsreport');
 
-// let DB = new DATASTORE({ filename: './data/forms_db.json', autoload: true });
+let DB = new DATASTORE({ filename: './data/forms_db.json', autoload: true });
      this.data = [];
 
 class DataHandler {
-	constructor(whichAjax, data) {
+	constructor(whichAjax, data, req) {
           if (whichAjax == 0 || whichAjax == 1) {
                this.savePDF(data);
-               // DB.loadDatabase();
           }
 	}
 
@@ -28,10 +28,9 @@ class DataHandler {
      }
 
      savePDF(data) {
-          let keys = Object.keys(data);
-          for (key in keys) {
-               console.log(key);
-          }
+          /*for (let key in Object.keys(data)) {
+               console.log(data.key);
+          }*/
      }
 
      loadData(callback) {

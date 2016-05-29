@@ -82,7 +82,7 @@ class app {
                }).on('error', (err) => {
                     next(err);
                }).on('end', () => {
-                    new DATA_HANDLER(whichAjax);
+                    new DATA_HANDLER(whichAjax, formData, req);
                     this.nedbData.queryData(formData);
                });
                res.writeHead(200, {'content-type': 'text/plain'});

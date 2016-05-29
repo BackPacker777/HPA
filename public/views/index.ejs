@@ -16,254 +16,256 @@
     </div>
 </div>
 <br>
-<div class="row">
-     <div class="small-6 columns">
-          <label class="label">CAMPER Last Name</label>
-          <input type="text" name="lastName" id="lastName" maxlength="20">
+<form>
+     <div class="row">
+          <div class="small-6 columns">
+               <label class="label">CAMPER Last Name</label>
+               <input type="text" name="lastName" id="lastName" maxlength="20" required>
+          </div>
+          <div class="small-6 columns">
+               <label class="label">CAMPER First Name</label>
+               <input type="text" name="firstName" id="firstName" maxlength="20" required>
+          </div>
      </div>
-     <div class="small-6 columns">
-          <label class="label">CAMPER First Name</label>
-          <input type="text" name="firstName" id="firstName" maxlength="20">
+     <div class="row">
+          <div class="small-6 columns">
+               <label class="label">DATE OF BIRTH</label>
+               <input type="date" name="dob" id="dob" required>
+          </div>
+          <div class="small-6 columns">
+               <label class="label">CURRENT AGE</label>
+               <input type="number" name="age" id="age" maxlength="2">
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-6 columns">
-          <label class="label">DATE OF BIRTH</label>
-          <input type="date" name="dob" id="dob">
+     <div class="row">
+          <div class="small-12 columns">
+               <label class="label">PARENT(S)</label>
+               <input type="text" name="parents" id="parents" maxlength="50">
+          </div>
      </div>
-     <div class="small-6 columns">
-          <label class="label">CURRENT AGE</label>
-          <input type="number" name="age" id="age" maxlength="2">
+     <div class="row">
+          <div class="small-12 columns">
+               <label class="label">SUMMER ADDRESS</label>
+               <input type="text" name="summerAddr" id="summerAddr" maxlength="50">
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <label class="label">PARENT(S)</label>
-          <input type="text" name="parents" id="parents" maxlength="50">
+     <div class="row">
+          <div class="small-12 columns">
+               <label class="label">EMAIL</label>
+               <input type="email" name="email" id="email" maxlength="80">
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <label class="label">SUMMER ADDRESS</label>
-          <input type="text" name="summerAddr" id="summerAddr" maxlength="50">
+     <div class="row">
+          <div class="small-12 columns">
+               <p><blockquote>WINTER ADDRESS:</blockquote></p>
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <label class="label">EMAIL</label>
-          <input type="email" name="email" id="email" maxlength="80">
+     <div class="row">
+          <div class="small-8 columns">
+               <label class="label">STREET</label>
+               <input type="text" name="street" id="street" maxlength="40">
+          </div>
+          <div class="small-4 columns">
+               <label class="label">ZIP</label>
+               <input type="number" name="zip" id="zip" maxlength="7">
+          </div>
+          <input type="hidden" name="city" id="city">
+          <input type="hidden" name="state" id="state">
      </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <p><blockquote>WINTER ADDRESS:</blockquote></p>
+     <div class="row">
+          <div class="small-4 columns">
+               <label class="label">LOCAL PHONE</label>
+               <input type="tel" name="localPhone" id="localPhone" maxlength="20">
+          </div>
+          <div class="small-4 columns">
+               <label class="label">CELL PHONE(S)</label>
+               <input type="tel" name="cellPhone1" id="cellPhone1" maxlength="20" placeholder="Cell 1">
+          </div>
+          <div class="small-4 columns">
+               <label class="label"></label>
+               <input type="tel" name="cellPhone2" id="cellPhone2" maxlength="20" placeholder="Cell 2">
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-8 columns">
-          <label class="label">STREET</label>
-          <input type="text" name="street" id="street" maxlength="40">
+     <div class="row">
+          <div class="small-12 columns">
+               <p><blockquote>HARBOR POINT SPONSOR:</blockquote></p>
+          </div>
      </div>
-     <div class="small-4 columns">
-          <label class="label">ZIP</label>
-          <input type="text" pattern="[0-9]{7}" name="zip" id="zip" maxlength="7">
+     <div class="row">
+          <div class="small-5 columns">
+               <label class="label">LAST NAME</label>
+               <input type="text" name="sponsorLastName" id="sponsorLastName" maxlength="20">
+          </div>
+          <div class="small-5 columns">
+               <label class="label">FIRST NAME</label>
+               <input type="text" name="sponsorFirstName" id="sponsorFirstName" maxlength="20">
+          </div>
+          <div class="small-2 columns">
+               <label class="label">SPONSOR PHONE</label>
+               <input type="tel" name="sponsorPhone" id="sponsorPhone" maxlength="15">
+          </div>
      </div>
-     <input type="hidden" name="city" id="city">
-     <input type="hidden" name="state" id="state">
-</div>
-<div class="row">
-     <div class="small-4 columns">
-          <label class="label">LOCAL PHONE</label>
-          <input type="tel" name="localPhone" id="localPhone" maxlength="20">
+     <hr>
+     <div class="row">
+          <div class="small-12 columns">
+               <label class="label">MEDICAL INFORMATION:</label>
+               <span>&nbsp; &nbsp;DOES CAMPER HAVE ALLERGIES? &nbsp; &nbsp;</span>
+               <input type="radio" name="allergies" id="yesAllergy" value="1">YES &nbsp; &nbsp;
+               <input type="radio" name="allergies" id="noAllergy" value="0">NO
+          </div>
      </div>
-     <div class="small-4 columns">
-          <label class="label">CELL PHONE(S)</label>
-          <input type="tel" name="cellPhone1" id="cellPhone1" maxlength="20" placeholder="Cell 1">
+     <div class="row" id="allergiesDiv">
+          <div class="small-12 columns">
+               <label class="label">LIST HERE</label>
+               <input type="text" name="allergies" id="allergies" maxlength="100">
+          </div>
      </div>
-     <div class="small-4 columns">
-          <label class="label"></label>
-          <input type="tel" name="cellPhone2" id="cellPhone2" maxlength="20" placeholder="Cell 2">
+     <div class="row">
+          <div class="small-12 columns">
+               <label class="label">LIST ANY OTHER MEDICAL PROBLEMS THAT MAY AFFECT CAMPERS ABILITY TO PARTICIPATE IN CAMP
+                    ACTIVITIES</label>
+               <input type="text" name="medicalProbs" id="medicalProbs" maxlength="100">
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <p><blockquote>HARBOR POINT SPONSOR:</blockquote></p>
+     <div class="row">
+          <div class="small-12 columns">
+               <p><blockquote>EMERGENCY CONTACT (OTHER THAN PARENTS)</blockquote></p>
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-5 columns">
-          <label class="label">LAST NAME</label>
-          <input type="text" name="sponsorLastName" id="sponsorLastName" maxlength="20">
+     <div class="row">
+          <div class="small-5 columns">
+               <label class="label">LAST NAME</label>
+               <input type="text" name="emergLastName" id="emergLastName" maxlength="20">
+          </div>
+          <div class="small-5 columns">
+               <label class="label">FIRST NAME</label>
+               <input type="text" name="emergFirstName" id="emergFirstName" maxlength="20">
+          </div>
+          <div class="small-2 columns">
+               <label class="label">SPONSOR PHONE</label>
+               <input type="tel" name="emergPhone" id="emergPhone" maxlength="15">
+          </div>
      </div>
-     <div class="small-5 columns">
-          <label class="label">FIRST NAME</label>
-          <input type="text" name="sponsorFirstName" id="sponsorFirstName" maxlength="20">
+     <div class="row">
+          <div class="small-12 columns">
+               <p><blockquote>DROP OFF AND PICK-UP PLAN (SEE PERMISSION FORM)</blockquote></p>
+          </div>
      </div>
-     <div class="small-2 columns">
-          <label class="label">SPONSOR PHONE</label>
-          <input type="tel" name="sponsorPhone" id="sponsorPhone" maxlength="15">
+     <div class="row">
+          <div class="small-12 columns">
+               <label class="label">OTHER ADULTS WHO MAY PICK-UP/DROP OFF MY CHILD:</label>
+               <input type="text" name="adults" id="adults" maxlength="100">
+          </div>
      </div>
-</div>
-<hr>
-<div class="row">
-     <div class="small-12 columns">
-          <label class="label">MEDICAL INFORMATION:</label>
-          <span>&nbsp; &nbsp;DOES CAMPER HAVE ALLERGIES? &nbsp; &nbsp;</span>
-          <input type="radio" name="allergies" id="yesAllergy" value="1">YES &nbsp; &nbsp;
-          <input type="radio" name="allergies" id="noAllergy" value="0">NO
+     <div class="row">
+          <div class="small-12 columns">
+               <p><strong>NON-RESIDENT CAMP RATES:</strong> &nbsp; PER WEEK: &nbsp;<strong>$200.00</strong>  &nbsp; &nbsp; PER DAY: &nbsp;<strong>$45.00</strong></p>
+               <p><i>PAYMENT FOR CAMP IS EXPECTED ON/BEFORE MONDAY OF EACH WEEK FOR PARTICIPATION
+               IN CAMP ACTIVITIES THAT WEEK. EARLY BIRD DISCOUNT IF PAID BEFORE 6/20/16 – SEE CAMP SCHEDULE FOR DETAILS.</i></p>
+          </div>
      </div>
-</div>
-<div class="row" id="allergiesDiv">
-     <div class="small-12 columns">
-          <label class="label">LIST HERE</label>
-          <input type="text" name="allergies" id="allergies" maxlength="100">
+     <div class="row">
+          <div class="small-12 columns">
+               <p><strong>BILLING INFORMATION (HARBOR POINT RESIDENTS ONLY SEE DIRECTORY FOR RATES)</strong></p>
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <label class="label">LIST ANY OTHER MEDICAL PROBLEMS THAT MAY AFFECT CAMPERS ABILITY TO PARTICIPATE IN CAMP
-               ACTIVITIES</label>
-          <input type="text" name="medicalProbs" id="medicalProbs" maxlength="100">
+     <div class="row">
+          <div class="small-8 columns">
+               <label class="label">BILLING NAME</label>
+               <input type="text" name="billingName" id="billingName" maxlength="40">
+          </div>
+          <div class="small-4 columns">
+               <label class="label">COTTAGE NUMBER</label>
+               <input type="number" name="cottageNum" id="cottageNum" maxlength="8">
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <p><blockquote>EMERGENCY CONTACT (OTHER THAN PARENTS)</blockquote></p>
+     <div class="row">
+          <div class="small-12 columns">
+               <p><strong>Parent/Guardian Permissions for Harbor Point Association (Day Camp Program)</strong></p>
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-5 columns">
-          <label class="label">LAST NAME</label>
-          <input type="text" name="emergLastName" id="emergLastName" maxlength="20">
+     <div class="row">
+          <div class="small-12 columns">
+               <label class="label">Name of Child</label>
+               <input type="text" name="childName" id="childName" maxlength="100">
+          </div>
      </div>
-     <div class="small-5 columns">
-          <label class="label">FIRST NAME</label>
-          <input type="text" name="emergFirstName" id="emergFirstName" maxlength="20">
+     <div class="row">
+          <div class="small-10 columns">
+               <p>I give permission for counselors to take steps needed for administering first aid/CPR and for obtaining emergency medical care for injuries or suspected
+                    injuries. In an emergency, a counselor will call the Harbor Point Office and the office staff will contact the local ambulance service. The parent cell
+                    phone number(s) will be called first, then the emergency phone number listed.</p>
+          </div>
+          <div class="small-2 columns">
+               <input type="checkbox" name="aidPermission" id="aidPermission" value="1"> YES
+          </div>
      </div>
-     <div class="small-2 columns">
-          <label class="label">SPONSOR PHONE</label>
-          <input type="tel" name="emergPhone" id="emergPhone" maxlength="15">
+     <div class="row">
+          <div class="small-10 columns">
+               <p><strong>I hereby warrant that to the best of my knowledge, my child is in good health, and I assume all responsibility for the health of my child.</strong></p>
+          </div>
+          <div class="small-2 columns">
+               <input type="checkbox" name="goodHealth" id="goodHealth" value="1" required> YES
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <p><blockquote>DROP OFF AND PICK-UP PLAN (SEE PERMISSION FORM)</blockquote></p>
+     <div class="row">
+          <div class="small-12 columns">
+               <p>Please note the ‘drop off’ and ‘pick up’ daily arrangements for your child. Parents or an authorized adult must check-in and check-out their children to
+                    camp every day by signing the attendance list at the Registration booth. For their personal safety, children are not allowed to be dropped off, or check
+                    themselves in or out. If you would like to pick up your child before normal dismissal time, please inform the Camp Director or Camp Manager.</p>
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <label class="label">OTHER ADULTS WHO MAY PICK-UP/DROP OFF MY CHILD:</label>
-          <input type="text" name="adults" id="adults" maxlength="100">
+     <div class="row">
+          <div class="small-10 columns">
+               <p>I agree to adhere to these ‘drop off’ and ‘pick up’ arrangements.</p>
+          </div>
+          <div class="small-2 columns">
+               <input type="checkbox" name="adhere" id="adhere" value="1"> YES
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <p><strong>NON-RESIDENT CAMP RATES:</strong> &nbsp; PER WEEK: &nbsp;<strong>$200.00</strong>  &nbsp; &nbsp; PER DAY: &nbsp;<strong>$45.00</strong></p>
-          <p><i>PAYMENT FOR CAMP IS EXPECTED ON/BEFORE MONDAY OF EACH WEEK FOR PARTICIPATION
-          IN CAMP ACTIVITIES THAT WEEK. EARLY BIRD DISCOUNT IF PAID BEFORE 6/20/16 – SEE CAMP SCHEDULE FOR DETAILS.</i></p>
+     <div class="row">
+          <div class="small-12 columns">
+               <label class="label">My child is over 8 years of age. The following arrangements will be in place for my child</label>
+               <input type="text" name="childArrange" id="childArrange" maxlength="100">
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <p><strong>BILLING INFORMATION (HARBOR POINT RESIDENTS ONLY SEE DIRECTORY FOR RATES)</strong></p>
+     <div class="row">
+          <div class="small-12 columns">
+               <p>I, the undersigned, individually and as parent/guardian of the minor herein above identified, assume all responsibility for and all risk of damage or
+                    injury that may occur to the minor herein below identified as a participant in the Harbor Point Association (Day Camp Program), while attending sessions or
+                    using equipment or facilities of said Program including water activities and activities that are part of the said program that take place off of the Harbor
+                    Point Association grounds that will require bike riding, walking or bus transportation to said activity. I also understand that this will include said
+                    minor(s) participation in clinics and workshops under the leadership of organizations other than the Harbor Point Association (Day Camp Program). In
+                    consideration of the acceptance of the minor(s) herein above named as participant in the Harbor Point Association (Day Camp Program), the undersigned
+                    hereby releases and discharges the Harbor Point Association, its shareholders and members, employees and agents from all claims, demands, rights, or causes
+                    of action, present or future, whether known, anticipated or unanticipated, and resulting from or arising out of, or incident to, participation of the
+                    minor(s) herein above identified in the Harbor Point Association (Day Camp Program).</p>
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-8 columns">
-          <label class="label">BILLING NAME</label>
-          <input type="text" name="billingName" id="billingName" maxlength="40">
+     <div class="row">
+          <div class="small-12 columns">
+               <label class="label">Parent/Guardian Signature</label>
+               <input type="text" name="parentSign" id="parentSign" maxlength="100">
+          </div>
      </div>
-     <div class="small-4 columns">
-          <label class="label">COTTAGE NUMBER</label>
-          <input type="number" name="cottageNum" id="cottageNum" maxlength="8">
+     <div class="row">
+          <div class="small-12 columns">
+               <label class="label">Print Parent/Guardian Name</label>
+               <input type="text" name="parentPrint" id="parentPrint" maxlength="100">
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <p><strong>Parent/Guardian Permissions for Harbor Point Association (Day Camp Program)</strong></p>
+     <div class="row">
+          <div class="small-12 columns">
+               <label class="label">Date</label>
+               <input type="text" name="date" id="date" maxlength="20">
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <label class="label">Name of Child</label>
-          <input type="text" name="childName" id="childName" maxlength="100">
+     <div class="row">
+          <div class="small-12 columns end">
+               <button type="submit" class="large expanded button success" id="submit">S U B M I T</button>
+          </div>
      </div>
-</div>
-<div class="row">
-     <div class="small-10 columns">
-          <p>I give permission for counselors to take steps needed for administering first aid/CPR and for obtaining emergency medical care for injuries or suspected
-               injuries. In an emergency, a counselor will call the Harbor Point Office and the office staff will contact the local ambulance service. The parent cell
-               phone number(s) will be called first, then the emergency phone number listed.</p>
-     </div>
-     <div class="small-2 columns">
-          <input type="checkbox" name="aidPermission" id="aidPermission" value="1"> YES
-     </div>
-</div>
-<div class="row">
-     <div class="small-10 columns">
-          <p><strong>I hereby warrant that to the best of my knowledge, my child is in good health, and I assume all responsibility for the health of my child.</strong></p>
-     </div>
-     <div class="small-2 columns">
-          <input type="checkbox" name="goodHealth" id="goodHealth" value="1" required> YES
-     </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <p>Please note the ‘drop off’ and ‘pick up’ daily arrangements for your child. Parents or an authorized adult must check-in and check-out their children to
-               camp every day by signing the attendance list at the Registration booth. For their personal safety, children are not allowed to be dropped off, or check
-               themselves in or out. If you would like to pick up your child before normal dismissal time, please inform the Camp Director or Camp Manager.</p>
-     </div>
-</div>
-<div class="row">
-     <div class="small-10 columns">
-          <p>I agree to adhere to these ‘drop off’ and ‘pick up’ arrangements.</p>
-     </div>
-     <div class="small-2 columns">
-          <input type="checkbox" name="adhere" id="adhere" value="1"> YES
-     </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <label class="label">My child is over 8 years of age. The following arrangements will be in place for my child</label>
-          <input type="text" name="childArrange" id="childArrange" maxlength="100">
-     </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <p>I, the undersigned, individually and as parent/guardian of the minor herein above identified, assume all responsibility for and all risk of damage or
-               injury that may occur to the minor herein below identified as a participant in the Harbor Point Association (Day Camp Program), while attending sessions or
-               using equipment or facilities of said Program including water activities and activities that are part of the said program that take place off of the Harbor
-               Point Association grounds that will require bike riding, walking or bus transportation to said activity. I also understand that this will include said
-               minor(s) participation in clinics and workshops under the leadership of organizations other than the Harbor Point Association (Day Camp Program). In
-               consideration of the acceptance of the minor(s) herein above named as participant in the Harbor Point Association (Day Camp Program), the undersigned
-               hereby releases and discharges the Harbor Point Association, its shareholders and members, employees and agents from all claims, demands, rights, or causes
-               of action, present or future, whether known, anticipated or unanticipated, and resulting from or arising out of, or incident to, participation of the
-               minor(s) herein above identified in the Harbor Point Association (Day Camp Program).</p>
-     </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <label class="label">Parent/Guardian Signature</label>
-          <input type="text" name="parentSign" id="parentSign" maxlength="100">
-     </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <label class="label">Print Parent/Guardian Name</label>
-          <input type="text" name="parentPrint" id="parentPrint" maxlength="100">
-     </div>
-</div>
-<div class="row">
-     <div class="small-12 columns">
-          <label class="label">Date</label>
-          <input type="text" name="date" id="date" maxlength="20">
-     </div>
-</div>
-<div class="row">
-     <div class="small-12 columns end">
-          <span class="large expanded button success" id="submit">S U B M I T</span>
-     </div>
-</div>
+</form>
 <div class="row">
      <div class="small-12 columns">
           <h4 id="result"></h4>

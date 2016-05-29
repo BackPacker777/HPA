@@ -103,7 +103,6 @@
 	                    if (document.getElementById('zip').value == this.zipCodes[i][0]) {
 	                         document.getElementById('city').value = this.zipCodes[i][1];
 	                         document.getElementById('state').value = this.zipCodes[i][2];
-	                         console.log(`City: ${this.zipCodes[i][1]}  State: ${this.zipCodes[i][2]}`);
 	                         break;
 	                    }
 	               }
@@ -117,7 +116,6 @@
 
 	     static setAge() {
 	          document.getElementById('dob').addEventListener('blur', () => {
-	               console.log(document.getElementById('dob').value);
 	               let dob = document.getElementById('dob').value.split('-');
 	               document.getElementById('age').value = new Date().getFullYear() - dob[0];
 	          });
@@ -125,7 +123,12 @@
 
 	     handleSubmit() {
 	          document.getElementById('submit').addEventListener('click', () => {
-	               this.processForm();
+	               if (document.getElementById('lastName').value != '' || document.getElementById('firstName').value != '' ||
+	                    document.getElementById('age').value != '' || document.getElementById('goodHealth').checked) {
+	                    this.processForm();
+	               } else {
+	                    alert('Please fill in all required fields');
+	               }
 	          });
 	     }
 
