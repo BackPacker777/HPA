@@ -2,7 +2,7 @@
  *   @author Bates, Howard [ hbates@northmen.org ]
  *   @version 0.0.1
  *   @summary http server: HPA Forms || Created: 05.25.2016
- *   @todo save as PDF; save as CSV
+ *   @todo save as PDF;
  */
 
 "use strict";
@@ -11,6 +11,9 @@ const FADE = require('./FadeStuff');
 
 class main {
      constructor() {
+          document.getElementById('theForm').onsubmit = () => {
+               return false;
+          };
           this.zipCodes = null;
           this.loadZipCodes();
           main.handleAllergies();
@@ -65,7 +68,7 @@ class main {
 
      static setDate() {
           let date = new Date();
-          document.getElementById('date').value = `${date.getMonth()}/${date.getDay()}/${date.getFullYear()}`;
+          document.getElementById('date').value = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
      }
 
      static setAge() {
@@ -76,9 +79,10 @@ class main {
      }
 
      handleSubmit() {
-          document.getElementById('submit').addEventListener('click', () => {
-               if (document.getElementById('lastName').value != '' || document.getElementById('firstName').value != '' ||
-                    document.getElementById('age').value != '' || document.getElementById('goodHealth').checked) {
+          document.getElementById('submit').addEventListener('click', (event) => {
+               // event.preventDefault();
+               if (document.getElementById('lastName').value != '' && document.getElementById('firstName').value != '' &&
+                    document.getElementById('age').value != '' && document.getElementById('goodHealth').checked) {
                     this.processForm();
                } else {
                     alert('Please fill in all required fields');

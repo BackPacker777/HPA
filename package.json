@@ -27,7 +27,9 @@
     "eslint": "latest",
     "formidable": "latest",
     "ejs": "latest",
-    "jsreport": "latest",
+    "nodemailer": "latest",
+    "json2csv": "latest",
+    "ya-csv": "latest",
     "nedb": "latest"
   }
 }

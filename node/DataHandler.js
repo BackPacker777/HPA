@@ -2,23 +2,24 @@
  *   @author Bates, Howard [ hbates@northmen.org ]
  *   @version 0.0.1
  *   @summary http server: HPA Forms || Created: 05.25.2016
- *   @todo save as PDF; save as CSV
+ *   @todo save as PDF;
  */
 
 "use strict";
 
 const FS = require ('fs'),
      DATASTORE = require('nedb'),
-     PDF = require('html5-to-pdf'),
-     JSREPORT = require('jsreport');
+     JSON2CSV = require('json2csv'),
+     MAILER = require('nodemailer'),
+     YA_CSV = require('ya-csv');
 
 let DB = new DATASTORE({ filename: './data/forms_db.json', autoload: true });
-     this.data = [];
 
 class DataHandler {
-	constructor(whichAjax, data, req) {
+	constructor(whichAjax, data) {
           if (whichAjax == 0 || whichAjax == 1) {
-               this.savePDF(data);
+               this.sendEmail(data);
+               this.saveCSV(data);
           }
 	}
 
@@ -27,10 +28,40 @@ class DataHandler {
           callback(fileHandle.toString());
      }
 
-     savePDF(data) {
-          /*for (let key in Object.keys(data)) {
-               console.log(data.key);
-          }*/
+     sendEmail(data) {
+          let smtpTrans = MAILER.createTransport('smtp://cc166f8c21481f328aab3eec3e563a06%40in-v3.mailjet.com:84c0c029e844d5ed04409a166b16ed33');
+
+          let mailOptions = {
+               from: 'HB <coder@codeelegant.com>',
+               to: 'arct.farion@gmail.com',
+               subject: 'New Camper Registration',
+               html: `<h1>${data.lastName}</h1>`,
+               attachments: [{
+                    fileName: 'forms_db.csv',
+                    path: './data/forms_db.csv'
+               }]
+          };
+
+          smtpTrans.sendMail(mailOptions, (err) => {
+               if(err){
+                    console.log(err);
+               } else {
+                    console.log('Message sent!');
+               }
+          });
+     }
+
+     saveCSV(data) {
+          let csvData = ['lastName', 'firstName', 'dob', 'age', 'parents', 'summerAddr', 'email', 'street', 'zip', 'city', 'state',
+               'localPhone', 'cellPhone1', 'cellPhone2', 'sponsorLastName', 'sponsorFirstName', 'sponsorPhone', 'allergies',
+               'allergiesList', 'medicalProbs', 'emergLastName', 'emergLastNam', 'emergPhone', 'adults', 'billingName',
+               'cottageNum', 'childName', 'aidPermission', 'goodHealth', 'adhere', 'childArrange', 'parentSign', 'parentPrint',
+               'date'];
+          JSON2CSV({ data: data, fields: csvData , hasCSVColumnTitle: false}, (err, csv) => {
+               let csvData = csv.replace(/['"]+/g, '').split(',');
+               let write = YA_CSV.createCsvFileWriter('./data/forms_db.csv', {'flags': 'a'});
+               write.writeRecord(csvData);
+          });
      }
 
      loadData(callback) {
@@ -60,8 +91,7 @@ class DataHandler {
                , completed: data.completed
                , status: data.status
                , date: data.date
-          }, { upsert: true,
-               returnUpdatedDocs: true });
+          }, { upsert: true });
      }
 
      addData(data) {

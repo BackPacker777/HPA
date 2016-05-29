@@ -2,7 +2,7 @@
  *   @author Bates, Howard [ hbates@northmen.org ]
  *   @version 0.0.1
  *   @summary http server: HPA Forms || Created: 05.25.2016
- *   @todo save as PDF; save as CSV
+ *   @todo save as PDF;
  */
 
 "use strict";
@@ -22,7 +22,7 @@ class app {
      loadServer() {
           const HTTP = require('http'),
                EJS = require('ejs'),
-               PORT = 1337,
+               PORT = 1339,
                SERVER = HTTP.createServer((req, res) => {
                     let httpHandler = (err, str, contentType) => {  //http://stackoverflow.com/questions/336859/var-functionname-function-vs-function-functionname
                          if (err) {
@@ -52,7 +52,7 @@ class app {
                          } else {
                               console.log("[405] " + req.method + " to " + req.url);
                               res.writeHead(405, "Method not supported", {'Content-Type': 'text/html'});
-                              res.end('<html><head><title>405 - Method not supported</title></head><body><h1>Method not supported.</h1></body></html>');
+                              res.end('<html><head><title>405 - Method not supported</title></head><body><h1>405 - Method not supported.</h1></body></html>');
                          }
                     } else if (req.url.indexOf('/javascripts/') >= 0) {
                          this.render(req.url.slice(1), 'application/ecmascript', httpHandler, 'utf-8');
@@ -82,7 +82,7 @@ class app {
                }).on('error', (err) => {
                     next(err);
                }).on('end', () => {
-                    new DATA_HANDLER(whichAjax, formData, req);
+                    new DATA_HANDLER(whichAjax, formData);
                     this.nedbData.queryData(formData);
                });
                res.writeHead(200, {'content-type': 'text/plain'});
@@ -93,12 +93,6 @@ class app {
                     res.end(zipData);
                });
           }
-          /*this.nedbData.loadData((docs) => {
-               let jsonDocs = JSON.stringify(docs); // http://stackoverflow.com/questions/5892569/responding-with-a-json-object-in-nodejs-converting-object-array-to-json-string
-               res.writeHead(200, {'content-type': 'application/json'});
-               res.end(jsonDocs);
-               this.ejsData = docs;
-          });*/
      }
 }
 
