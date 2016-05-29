@@ -62,6 +62,8 @@
 	          main.handleAllergies();
 	          main.setDate();
 	          this.handleZipEntry();
+	          main.setAge();
+	          this.handleSubmit();
 	     }
 
 	     loadZipCodes() {
@@ -111,6 +113,36 @@
 	     static setDate() {
 	          let date = new Date();
 	          document.getElementById('date').value = `${date.getMonth()}/${date.getDay()}/${date.getFullYear()}`;
+	     }
+
+	     static setAge() {
+	          document.getElementById('dob').addEventListener('blur', () => {
+	               console.log(document.getElementById('dob').value);
+	               let dob = document.getElementById('dob').value.split('-');
+	               document.getElementById('age').value = new Date().getFullYear() - dob[0];
+	          });
+	     }
+
+	     handleSubmit() {
+	          document.getElementById('submit').addEventListener('click', () => {
+	               this.processForm();
+	          });
+	     }
+
+	     processForm() {
+	          let bustCache = '?' + new Date().getTime();
+	          const XHR = new XMLHttpRequest();
+	          XHR.open('POST', document.url  + bustCache, true);
+	          XHR.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+	          let data = new FormData(document.querySelector('form')); // https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+	          XHR.send(data);
+	          XHR.onload = () => {
+	               if (XHR.readyState == 4 && XHR.status == 200) {
+	                    document.getElementById('result').innerHTML = XHR.responseText;
+	                    main.fade('in', 'result');
+	                    main.fade('out', 'result');
+	               }
+	          };
 	     }
 		 
 		 static fade(direction, fadeWhat) {

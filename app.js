@@ -11,11 +11,11 @@ const DATA_HANDLER = require('./node/DataHandler');
 
 class app {
      constructor() {
-          // this.ejsData = null;
-          // this.nedbData = new DATA_HANDLER();
-          // this.nedbData.loadData((docs) => {
-          //      this.ejsData = docs;
-          // });
+          this.ejsData = null;
+          this.nedbData = new DATA_HANDLER();
+          this.nedbData.loadData((docs) => {
+               this.ejsData = docs;
+          });
           this.loadServer();
      }
 
@@ -74,7 +74,7 @@ class app {
      }
 
      loadData(req, res, whichAjax) {
-          if (whichAjax === 1) {
+          if (whichAjax === 0) {
                const FORMIDABLE = require('formidable');  // https://docs.nodejitsu.com/articles/HTTP/servers/how-to-handle-multipart-form-data
                let formData = {};
                new FORMIDABLE.IncomingForm().parse(req).on('field', (field, name) => {
@@ -82,8 +82,11 @@ class app {
                }).on('error', (err) => {
                     next(err);
                }).on('end', () => {
+                    new DATA_HANDLER(whichAjax);
                     this.nedbData.queryData(formData);
                });
+               res.writeHead(200, {'content-type': 'text/plain'});
+               res.end('Request received. Thank you!');
           } else if (whichAjax === 2) {
                new DATA_HANDLER(whichAjax).loadCSVData('./data/ZipCodeDatabase.csv', (zipData) => {
                     res.writeHead(200, {'content-type': 'application/json'});

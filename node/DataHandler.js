@@ -1,42 +1,53 @@
 /**
  *   @author Bates, Howard [ hbates@northmen.org ]
  *   @version 0.0.1
- *   @summary http server: Serve HPA Forms || Created: 5.25.2016
- *   @todo Everything!
+ *   @summary http server: HPA Forms || Created: 05.25.2016
+ *   @todo save as PDF; save as CSV
  */
 
 "use strict";
 
-const FS = require ('fs');
-const DATASTORE = require('nedb');
-let DB = new DATASTORE({ filename: './data/forms_db.json', autoload: true });
+const FS = require ('fs'),
+     DATASTORE = require('nedb'),
+     JSREPORT = require('jsreport');
+
+// let DB = new DATASTORE({ filename: './data/forms_db.json', autoload: true });
      this.data = [];
 
 class DataHandler {
-	constructor(whichAjax) {
+	constructor(whichAjax, data) {
           if (whichAjax == 0 || whichAjax == 1) {
-               DB.loadDatabase();
+               this.savePDF(data);
+               // DB.loadDatabase();
           }
 	}
 
      loadCSVData(filePath, callback) {
           let fileHandle = FS.readFileSync(filePath, 'utf8');
           callback(fileHandle.toString());
+     }
 
-
-          /*const COLUMNS = 3;
-          let tempArray, finalData = [];
-          tempArray = fileHandle.split(/\r?\n/); //remove newlines
-          for (let i = 0; i < tempArray.length; i++) {
-               finalData[i] = tempArray[i].split(/,/).slice(0, COLUMNS);
-          }*/
-
+     savePDF(data) {
+          let keys = Object.keys(data);
+          for (key in keys) {
+               console.log(key);
+          }
      }
 
      loadData(callback) {
           DB.find({}, (err, docs) => {
                if (docs.length != null) {
                     callback(docs);
+               }
+          });
+     }
+
+     queryData(data) {
+          DB.findOne({ _id: data.id }, (err, docs) => {
+               if (docs == null) {
+                    this.addData(data);
+               } else {
+                    this.updateData(data);
                }
           });
      }
@@ -59,7 +70,7 @@ class DataHandler {
           DB.insert(data);
       }
 
-     /*queryData(data) { // keep as a reference for method below
+     /*queryData(data) { // keep as a reference for method above
           const THAT = this; //change to arrow function later
           // console.log(`DataHandler output: ${data.id}`);
           DB.findOne({ _id: data.id }, function(err, docs) {
@@ -70,16 +81,6 @@ class DataHandler {
                }
           });
      }*/
-
-     queryData(data) {
-          DB.findOne({ _id: data.id }, (err, docs) => {
-               if (docs == null) {
-                    this.addData(data);
-               } else {
-                    this.updateData(data);
-               }
-          });
-     }
 }
 
 module.exports = DataHandler;
