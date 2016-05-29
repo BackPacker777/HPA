@@ -27,6 +27,7 @@
     "eslint": "latest",
     "formidable": "latest",
     "ejs": "latest",
+    "jsreport": "latest",
     "nedb": "latest"
   }
 }
