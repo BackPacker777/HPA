@@ -125,8 +125,7 @@
 	     }
 
 	     handleSubmit() {
-	          document.getElementById('submit').addEventListener('click', (event) => {
-	               // event.preventDefault();
+	          document.getElementById('submit').addEventListener('click', () => {
 	               if (document.getElementById('lastName').value != '' && document.getElementById('firstName').value != '' &&
 	                    document.getElementById('age').value != '' && document.getElementById('goodHealth').checked) {
 	                    this.processForm();

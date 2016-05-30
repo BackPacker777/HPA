@@ -7,15 +7,14 @@
 
 "use strict";
 
-const DATA_HANDLER = require('./node/DataHandler');
+const DATA_HANDLER = require('./node/DataHandler'),
+     EJS = require('ejs');
 
 class app {
      constructor() {
           this.ejsData = null;
+          this.result = null;
           this.nedbData = new DATA_HANDLER();
-          this.nedbData.loadData((docs) => {
-               this.ejsData = docs;
-          });
           this.loadServer();
      }
 
@@ -36,7 +35,12 @@ class app {
                               res.end(EJS.render(str, {
                                    data: this.ejsData,
                                    filename: 'index.ejs' }));
-                         } else {
+                         } /*else if (contentType.indexOf('ejs') >= 0) {
+                              res.writeHead(200, { 'Content-Type': contentType });
+                              res.end(EJS.render(str, {
+                                   data: this.result,
+                                   filename: 'results.ejs' }));*/
+                           else {
                               res.writeHead(200, { 'Content-Type': contentType });
                               res.end(str, 'utf-8');
                          }
@@ -59,7 +63,9 @@ class app {
                     } else if (req.url.indexOf('/css/') >= 0) {
                          this.render(req.url.slice(1), 'text/css', httpHandler, 'utf-8');
                     } else if (req.url.indexOf('/images/') >= 0) {
-                         this.render(req.url.slice(1), 'image/jpeg', httpHandler, 'binary');
+                         this.render(req.url.slice(1), 'image/png', httpHandler, 'binary');
+                    } else if (req.url.indexOf('/results.ejs') >= 0) {
+                         this.render('public/views/results.ejs', 'text/html', httpHandler, 'utf-8');
                     } else {
                          this.render('public/views/index.ejs', 'text/html', httpHandler, 'utf-8');
                     }
@@ -82,11 +88,13 @@ class app {
                }).on('error', (err) => {
                     next(err);
                }).on('end', () => {
-                    new DATA_HANDLER(whichAjax, formData);
+                    new DATA_HANDLER(whichAjax, formData, req, res);
                     this.nedbData.queryData(formData);
                });
                res.writeHead(200, {'content-type': 'text/plain'});
                res.end('Request received. Thank you!');
+          } else if (whichAjax === 1) {
+               // this.result = new DATA_HANDLER().getResultsJSON();
           } else if (whichAjax === 2) {
                new DATA_HANDLER(whichAjax).loadCSVData('./data/ZipCodeDatabase.csv', (zipData) => {
                     res.writeHead(200, {'content-type': 'application/json'});
