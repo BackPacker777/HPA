@@ -10,7 +10,7 @@
 const FS = require ('fs'),
      DATASTORE = require('nedb'),
      JSON2CSV = require('json2csv'),
-     MAILER = require('nodemailer'),
+     PDF = require('html-pdf'),
      YA_CSV = require('ya-csv');
 
 let DB = new DATASTORE({ filename: './data/forms_db.json', autoload: true });
@@ -18,8 +18,9 @@ let DB = new DATASTORE({ filename: './data/forms_db.json', autoload: true });
 class DataHandler {
 	constructor(whichAjax, data) {
           if (whichAjax == 0 || whichAjax == 1) {
-               this.sendEmail(data);
-               this.saveCSV(data);
+               this.savePDF(data);
+               // this.sendEmail();
+               // this.saveCSV(data);
           }
 	}
 
@@ -28,26 +29,28 @@ class DataHandler {
           callback(fileHandle.toString());
      }
 
-     sendEmail(data) {
-          let smtpTrans = MAILER.createTransport('smtp://cc166f8c21481f328aab3eec3e563a06%40in-v3.mailjet.com:84c0c029e844d5ed04409a166b16ed33');
+     savePDF(data) {
+          let htmlFile = FS.readdirSync('./public/views/results.html', 'utf8');
+          let options = ({ format: 'Letter'});
+          PDF.create(htmlFile, options).toFile('./data/registrations/camper.pdf', (err, res) => {
+               console.log(res);
+          });
+     }
 
-          let mailOptions = {
-               from: 'HB <coder@codeelegant.com>',
-               to: 'arct.farion@gmail.com',
-               subject: 'New Camper Registration',
-               html: `<h1>${data.lastName}</h1>`,
-               attachments: [{
-                    fileName: 'forms_db.csv',
-                    path: './data/forms_db.csv'
-               }]
+     sendEmail() {
+          let api_key = 'key-72dc0e81b6f63109e2131712aa5fe3e6';
+          let domain = 'sandbox20abcc20bfc3457ba733493c74f521f8.mailgun.org';
+          let mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+          let email = {
+               from: 'Registering Camper',
+               to: 'bates4e@gmail.com',
+               subject: 'Hello',
+               text: 'Registration attached',
+               attachment: './data/registrations/camper.pdf'
           };
 
-          smtpTrans.sendMail(mailOptions, (err) => {
-               if(err){
-                    console.log(err);
-               } else {
-                    console.log('Message sent!');
-               }
+          mailgun.messages().send(email, (err, body) => {
+               console.log(body);
           });
      }
 
