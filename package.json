@@ -27,7 +27,6 @@
     "eslint": "latest",
     "formidable": "latest",
     "ejs": "latest",
-    "nodemailer": "latest",
     "mailgun-js": "latest",
     "html-pdf": "latest",
     "json2csv": "latest",
