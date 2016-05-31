@@ -20,7 +20,7 @@ class DataHandler {
 	constructor(whichAjax, data, req, res) {
           this.file = null;
           if (whichAjax == 0) {
-               this.saveHTML(data);
+               // this.saveHTML(data);
                this.savePDF(data);
                this.saveCSV(data);
                this.sendEmail();
