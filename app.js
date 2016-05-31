@@ -21,7 +21,7 @@ class app {
      loadServer() {
           const HTTP = require('http'),
                EJS = require('ejs'),
-               PORT = 1339,
+               PORT = 1337,
                SERVER = HTTP.createServer((req, res) => {
                     let httpHandler = (err, str, contentType) => {  //http://stackoverflow.com/questions/336859/var-functionname-function-vs-function-functionname
                          if (err) {
@@ -35,12 +35,7 @@ class app {
                               res.end(EJS.render(str, {
                                    data: this.ejsData,
                                    filename: 'index.ejs' }));
-                         } /*else if (contentType.indexOf('ejs') >= 0) {
-                              res.writeHead(200, { 'Content-Type': contentType });
-                              res.end(EJS.render(str, {
-                                   data: this.result,
-                                   filename: 'results.ejs' }));*/
-                           else {
+                         } else {
                               res.writeHead(200, { 'Content-Type': contentType });
                               res.end(str, 'utf-8');
                          }

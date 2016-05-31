@@ -20,7 +20,7 @@ class DataHandler {
 	constructor(whichAjax, data, req, res) {
           this.file = null;
           if (whichAjax == 0) {
-               this.saveHTML(data);
+               // this.saveHTML(data);
                this.savePDF(data);
                this.saveCSV(data);
                this.sendEmail();
@@ -72,8 +72,8 @@ class DataHandler {
           let mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
           let email = {
                from: 'Registering Camper <coder@codeelegant.com>',
-               to: 'bates4e@gmail.com',
-               subject: 'Hello',
+               to: 'marlene@harborpointassociation.com',
+               subject: 'Registering Camper',
                text: 'Registration attached',
                attachment: './data/registrations/camper.pdf'
           };
