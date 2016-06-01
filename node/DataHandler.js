@@ -2,7 +2,7 @@
  *   @author Bates, Howard [ hbates@northmen.org ]
  *   @version 0.0.1
  *   @summary http server: HPA Forms || Created: 05.25.2016
- *   @todo save as PDF;
+ *   @todo 
  */
 
 "use strict";
@@ -115,14 +115,15 @@ class DataHandler {
      }
 
      updateData(data) {
-          DB.update({ _id: data.id }, { building: data.building
-               , roomNumber: data.roomNumber
-               , submitter: data.submitter
-               , problemDesc: data.problemDesc
-               , assigned: data.assigned
-               , completed: data.completed
-               , status: data.status
-               , date: data.date
+          DB.update({ _id: data.id }, { lastName: data.lastName, firstName: data.firstName, dob: data.dob,
+               age: data.age, parents: data.parents, summerAddr: data.summerAddr, email: data.email, street: data.street,
+               city: data.city, state: data.state, zip: data.zip, localPhone: data.localPhone, cellPhone1: data.cellPhone1,
+               cellPhone2: data.cellPhone2, sponsorLastName: data.sponsorLastName, sponsorFirstName: data.sponsorFirstName,
+               sponsorPhone: data.sponsorPhone, allergies: data.allergies, allergiesList: data.allergiesList, medicalProbs: data.medicalProbs,
+               emergLastName: data.emergLastName, emergFirstName: data.emergFirstName, emergPhone: data.emergPhone, adults: data.adults,
+               billingName: data.billingName, cottageNum: data.cottageNum, childName: data.childName, aidPermission: data.aidPermission,
+               goodHealth: data.goodHealth, adhere: data.adhere, childArrange: data.childArrange, parentSign: data.parentSign,
+               parentPrint: data.parentPrint, date: data.date
           }, { upsert: true });
      }
 
@@ -130,18 +131,6 @@ class DataHandler {
           delete data.id;  // remove id field out of JSON parameter
           DB.insert(data);
       }
-
-     /*queryData(data) { // keep as a reference for method above
-          const THAT = this; //change to arrow function later
-          // console.log(`DataHandler output: ${data.id}`);
-          DB.findOne({ _id: data.id }, function(err, docs) {
-               if (docs == null) {
-                    THAT.addData(data);
-               } else {
-                    THAT.updateData(data);
-               }
-          });
-     }*/
 }
 
 module.exports = DataHandler;

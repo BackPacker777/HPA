@@ -48,7 +48,7 @@
 	 *   @author Bates, Howard [ hbates@northmen.org ]
 	 *   @version 0.0.1
 	 *   @summary http server: HPA Forms || Created: 05.25.2016
-	 *   @todo save as PDF;
+	 *   @todo 
 	 */
 
 	"use strict";
@@ -150,7 +150,7 @@
 	               }
 	          };
 	     }
-		 
+
 		 static fade(direction, fadeWhat) {
 	          new FADE(direction, fadeWhat).doFade();
 	     }
