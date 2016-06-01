@@ -128,7 +128,16 @@
 	          document.getElementById('submit').addEventListener('click', () => {
 	               if (document.getElementById('lastName').value != '' && document.getElementById('firstName').value != '' &&
 	                    document.getElementById('age').value != '' && document.getElementById('goodHealth').checked) {
-	                    this.processForm();
+	                    if (document.getElementById('localPhone').value == '' || /\d{3}-\d{3}-\d{4}/.test(document.getElementById('localPhone').value)
+	                         && document.getElementById('cellPhone1').value == '' || /\d{3}-\d{3}-\d{4}/.test(document.getElementById('cellPhone1').value)
+	                         && document.getElementById('cellPhone2').value == '' || /\d{3}-\d{3}-\d{4}/.test(document.getElementById('cellPhone2').value)
+	                         && document.getElementById('sponsorPhone').value == '' || /\d{3}-\d{3}-\d{4}/.test(document.getElementById('sponsorPhone').value)
+	                         && document.getElementById('emergPhone').value == '' || /\d{3}-\d{3}-\d{4}/.test(document.getElementById('emergPhone').value))
+	                    {
+	                         this.processForm();
+	                    } else {
+	                         alert(`Please correct telephone number(s)`);
+	                    }
 	               } else {
 	                    alert('Please fill in all required fields');
 	               }

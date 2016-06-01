@@ -38,6 +38,7 @@ class DataHandler {
 
      savePDF(data) {
           let html = null;
+
           EJS.renderFile('./public/views/results.ejs', {lastName: data.lastName, firstName: data.firstName, dob: data.dob,
                age: data.age, parents: data.parents, summerAddr: data.summerAddr, email: data.email, street: data.street,
                city: data.city, state: data.state, zip: data.zip, localPhone: data.localPhone, cellPhone1: data.cellPhone1,
@@ -57,7 +58,11 @@ class DataHandler {
                }
           });
 
-          PDF.create(html).toStream((err, stream) => {
+          let options = {
+               "base": "http://127.0.0.1:1337"
+          };
+
+          PDF.create(html, options).toStream((err, stream) => {
                stream.pipe(FS.createWriteStream('./data/registrations/camper.pdf'));
           });
      }
