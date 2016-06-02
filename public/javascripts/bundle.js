@@ -62,10 +62,10 @@
 	          };
 	          this.zipCodes = null;
 	          this.loadZipCodes();
-	          main.handleAllergies();
 	          main.setDate();
 	          this.handleZipEntry();
 	          main.setAge();
+	          this.handleAllergies();
 	          this.handleSubmit();
 	     }
 
@@ -89,7 +89,7 @@
 	          };
 	     }
 
-	     static handleAllergies() {
+	     /*static handleAllergies() {
 	          document.getElementById('allergiesDiv').style.visibility = 'hidden';
 	          document.getElementById('yesAllergy').addEventListener('click', () => {
 	               main.fade('in', 'allergiesDiv');
@@ -98,7 +98,7 @@
 	               main.fade('out', 'allergiesDiv');
 	               document.getElementById('allergies').value = '';
 	          });
-	     }
+	     }*/
 
 	     handleZipEntry() {
 	          document.getElementById('zip').addEventListener('change', () => {
@@ -121,6 +121,19 @@
 	          document.getElementById('dob').addEventListener('blur', () => {
 	               let dob = document.getElementById('dob').value.split('-');
 	               document.getElementById('age').value = new Date().getFullYear() - dob[0];
+	          });
+	     }
+
+	     handleAllergies() {
+	          document.getElementById('allergiesDiv').style.visibility = 'hidden';
+	          let allergies = `<input type="text" name="allergiesList" id="allergies" maxlength="100" required>`;
+	          document.getElementById('yesAllergy').addEventListener('click', () => {
+	               main.fade('in', 'allergiesDiv');
+	               document.getElementById('allergiesHere').innerHTML = allergies;
+	          });
+	          document.getElementById('noAllergy').addEventListener('click', () => {
+	               main.fade('out', 'allergiesDiv');
+	               document.getElementById('allergiesHere').innerHTML = '';
 	          });
 	     }
 
